@@ -1,0 +1,101 @@
+{
+    "compounds": [
+        {
+            "name": "Water",
+            "density": 0.99702,
+            "meta": "This compound will be x1"
+        },
+        {
+            "name": "MEG",
+            "density": 1.10970,
+            "meta": "This compound will be x2"
+        },
+        {
+            "name": "NaCl",
+            "density": 2.165,
+            "meta": "This compound will be x3"
+        }
+    ],
+    "compounds-meta": "[required] Compounds name and its density",
+    "binary": {
+        "rkp": {
+            "x1-x2": [
+                {
+                    "value": -0.041274,
+                    "vary": false,
+                    "meta": "This is the first value of 'p12' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                },
+                {
+                    "value": -0.014197,
+                    "vary": false,
+                    "meta": "This is the second value of 'p12' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                },
+                {
+                    "value": 0.006456,
+                    "vary": false,
+                    "meta": "This is the third value of 'p12' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                }
+            ],
+            "x1-x3": [
+                {
+                    "value": -0.169353,
+                    "vary": false,
+                    "meta": "This is the first value of 'p13' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                },
+                {
+                    "value": -0.204768,
+                    "vary": false,
+                    "meta": "This is the second value of 'p13' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                },
+                {
+                    "value": -0.252332,
+                    "vary": false,
+                    "meta": "This is the third value of 'p13' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                }
+            ],
+            "x2-x3": [
+                {
+                    "value": -2.159077,
+                    "vary": false,
+                    "meta": "This is the first value of 'p23' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                },
+                {
+                    "value": -4.727286,
+                    "vary": false,
+                    "meta": "This is the second value of 'p23' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                },
+                {
+                    "value": -2.6584793,
+                    "vary": false,
+                    "meta": "This is the third value of 'p23' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+                }
+            ]
+        },
+        "meta": "[required] Binary properties of Redlich-Kister equation"
+    },
+    "ternary": {
+        "rkp": [
+            {
+                "value": 0.0,
+                "meta": "This value is the initial guess for 'C' Redlich-Kister equation ternary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+            },
+            {
+                "value": 0.0,
+                "meta": "This value is the initial guess for 'D' Redlich-Kister equation ternary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+            },
+            {
+                "value": 0.0,
+                "meta": "This value is the initial guess for 'E' Redlich-Kister equation ternary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
+            }
+        ],
+        "meta": "[required] Ternary properties of Redlich-Kister equation"
+    },
+    "data": [
+        [0.015,        0.985,        0.0,          0.0,    1.108625],
+        [0.0146984,    0.9651924,    0.0201093,    0.0,    1.1213133],
+        [0.0143967,    0.9453846,    0.0402186,    0.0,    1.134035],
+        [0.0142472,    0.9355674,    0.0501854,    0.0,    1.140225],
+        [0.0140828,    0.9247726,    0.0611446,    0.0,    1.14767]
+    ],
+    "data-meta": "[required] Experimental data"
+}
