@@ -49,7 +49,7 @@ class TernaryRKModel:
         
         vid = vid1 + vid2 + vid3
         
-        # binaries
+        # 
         vs12 = 0
         vs13 = 0
         vs23 = 0
@@ -57,6 +57,7 @@ class TernaryRKModel:
         
         for i in range(len(data)):
             
+            # binaries
             vs12 += z1[i] * z2[i] * RedlichKisterEquation.calculate(rkp12, z1[i], z2[i])
             
             vs13 += z1[i] * z3[i] * RedlichKisterEquation.calculate(rkp13, z1[i], z3[i])
@@ -66,10 +67,13 @@ class TernaryRKModel:
             # ternary
             vs123 += z1[i] * z2[i] * z3[i] * (rkp123[0] + (rkp123[1] * z1[i]) + (rkp123[2] * z2[i]))
         
+        # excess volume
         vexcess = vs12 + vs13 + vs23 + vs123
         
+        # volume
         y = vid + vexcess
         
+        # getting density
         for i, value in enumerate(y):
             y[i] = 1. / value
         
