@@ -43,39 +43,38 @@ class TernaryRKModel:
         
         # ideal volume
         # ternary expression to avoid division by zero
-        vid1 = (z1 / d1) if d1 != 0 else 0
-        vid2 = (z2 / d2) if d2 != 0 else 0
-        vid3 = (z3 / d3) if d3 != 0 else 0
+        vid1 = (z1 / d1) if d1 != 0. else 0.
+        vid2 = (z2 / d2) if d2 != 0. else 0.
+        vid3 = (z3 / d3) if d3 != 0. else 0.
         
         vid = vid1 + vid2 + vid3
         
         # 
-        vs12 = 0
-        vs13 = 0
-        vs23 = 0
-        vs123 = 0
+        vs12 = []
+        vs13 = []
+        vs23 = []
+        vs123 = []
+        vexcess = []
         
         for i in range(len(data)):
             
             # binaries
-            vs12 += z1[i] * z2[i] * RedlichKisterEquation.calculate(rkp12, z1[i], z2[i])
+            vs12.append(z1[i] * z2[i] * RedlichKisterEquation.calculate(rkp12, z1[i], z2[i]))
             
-            vs13 += z1[i] * z3[i] * RedlichKisterEquation.calculate(rkp13, z1[i], z3[i])
+            vs13.append(z1[i] * z3[i] * RedlichKisterEquation.calculate(rkp13, z1[i], z3[i]))
             
-            vs23 += z2[i] * z3[i] * RedlichKisterEquation.calculate(rkp23, z2[i], z3[i])
+            vs23.append(z2[i] * z3[i] * RedlichKisterEquation.calculate(rkp23, z2[i], z3[i]))
         
             # ternary
-            vs123 += z1[i] * z2[i] * z3[i] * (rkp123[0] + (rkp123[1] * z1[i]) + (rkp123[2] * z2[i]))
+            vs123.append(z1[i] * z2[i] * z3[i] * (rkp123[0] + (rkp123[1] * z1[i]) + (rkp123[2] * z2[i])))
         
-        # excess volume
-        vexcess = vs12 + vs13 + vs23 + vs123
+            vexcess.append(vs12[i] + vs13[i] + vs23[i] + vs123[i])
         
-        # volume
-        y = vid + vexcess
+        rho = []
         
-        # getting density
-        for i, value in enumerate(y):
-            y[i] = 1. / value
+        for i in range(len(data)):
+            v = vid[i] + vexcess[i]
+            rho.append(1.0 / v)
         
         if verbose:
             print TernaryRKModel.modelTag, "ideal volume", vid
@@ -84,15 +83,16 @@ class TernaryRKModel:
             print TernaryRKModel.modelTag, "23 contribution", vs23
             print TernaryRKModel.modelTag, "123 contribution", vs123
             print TernaryRKModel.modelTag, "excess volume", vexcess
-            print TernaryRKModel.modelTag, "y calculated", y
+            print TernaryRKModel.modelTag, "rho calculated", rho
         
-        return y
+        return rho
     
     @staticmethod
     def residual(params, data, rho, verbose = False):
         rho_calc = TernaryRKModel.model(params, data, False)
         
         if verbose:
+            print TernaryRKModel.residualTag, "rho_calc", rho_calc
             print TernaryRKModel.residualTag, "rho", rho
             print TernaryRKModel.residualTag, "residual", (rho - rho_calc)
         
