@@ -2,12 +2,12 @@
     "compounds": [
         {
             "name": "Water",
-            "density": 0.0,
+            "density": 0.99708,
             "meta": "This compound will be x1"
         },
         {
             "name": "MEG",
-            "density": 1.10970,
+            "density": 1.10978,
             "meta": "This compound will be x2"
         },
         {
@@ -60,10 +60,12 @@
                 },
                 {
                     "value": 0.0,
+                    "vary": false,
                     "meta": "This is the second value of 'p23' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
                 },
                 {
                     "value": 0.0,
+                    "vary": false,
                     "meta": "This is the third value of 'p23' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
                 }
             ]
@@ -91,12 +93,13 @@
         "meta": "[required] Ternary properties of Redlich-Kister equation"
     },
     "data": [
-        [0.0,	0.0,	        1.0,    	0.0,	1.10978],
-        [0.0,	0.0100676784,	0.9899323,	0.0,	1.1161366667],
-        [0.0,	0.0259760211,	0.974024,	0.0,	1.1260866667],
-        [0.0,	0.0400134223,	0.9599866,	0.0,	1.13475],
-        [0.0,	0.0500972011,	0.9499028,	0.0,	1.1410266667],
-        [0.0,	0.060147381,	0.9398526,	0.0,	1.1475133333]
+	[0.00000,	1.00000,	0.00000,	298.15,	1.10978],
+	[0.00000,	0.98993,	0.01007,	298.15,	1.11614],
+	[0.00000,	0.97402,	0.02598,	298.15,	1.12609],
+	[0.00000,	0.95999,	0.04001,	298.15,	1.13475],
+	[0.00000,	0.94990,	0.0501,	298.15,	1.14103],
+	[0.00000,	0.93985,	0.06015,	298.15,	1.14751],
+	[0.00000,	0.93336,	0.06664,	298.15,	1.15153]
     ],
     "data-meta": "[required] Experimental data"
 }
