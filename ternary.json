@@ -26,7 +26,7 @@
                     "meta": "This is the first value of 'p12' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
                 },
                 {
-                    "value":0.01414796,
+                    "value": 0.01414796,
                     "vary": false,
                     "meta": "This is the second value of 'p12' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
                 },
@@ -38,7 +38,7 @@
             ],
             "x1-x3": [
                 {
-                    "value":-0.10506706,
+                    "value": -0.10506706,
                     "vary": false,
                     "meta": "This is the first value of 'p13' Redlich-Kister equation binary parameter. May be marked as constant and may have bounds - add 'vary', 'min' or 'max'"
                 },

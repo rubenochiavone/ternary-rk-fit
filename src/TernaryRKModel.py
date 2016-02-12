@@ -89,7 +89,7 @@ class TernaryRKModel:
     
     @staticmethod
     def residual(params, data, rho, verbose = False):
-        rho_calc = TernaryRKModel.model(params, data, False)
+        rho_calc = TernaryRKModel.model(params, data, verbose)
         
         if verbose:
             print TernaryRKModel.residualTag, "rho_calc", rho_calc
