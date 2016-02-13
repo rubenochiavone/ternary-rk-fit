@@ -97,34 +97,4 @@ class TernaryRKModel:
             print TernaryRKModel.residualTag, "residual", (rho - rho_calc)
         
         return rho - rho_calc
-    
-    @staticmethod
-    def printResults(out, data, rho):
-        rho_calc = TernaryRKModel.model(out.params, data)
-
-        print "[[Results]]"
-        print "   ", "rho", "\t", "rho_calc", "\t\t", "err"
-
-        errsum = 0
-
-        mxdev = 0
-
-        for i in range(len(data)):
-            err = abs(rho[i] - rho_calc[i])
-            
-            if err > mxdev:
-                mxdev = err
-            
-            errsum += err
-            
-            print "   ", rho[i], "\t", rho_calc[i], "\t", err
-
-        # mean deviation
-        mndev = errsum / len(data)
-
-
-        print "    "
-
-        print "    Mean deviation:", mndev
-        print "    Max deviation: ", mxdev
 
