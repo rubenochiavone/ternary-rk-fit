@@ -1,6 +1,6 @@
 # ternary-rk-fit
 
-Curve fitting of ternary Redlich-Kister equation.
+Curve fitting of ternary Redlich-Kister (RK) equation.
 
 ## Redlich-Kister equation
 
@@ -26,13 +26,13 @@ There is an executable file called `ternary-rk-fit` that can run the **ternary-r
 
 ### Input samples
 
-There are 4 samples of how to config **ternary-rk-fit**:
+There are 5 samples of how to config **ternary-rk-fit**:
 
-- `config/water_meg.json`
-- `config/water_nacl.json`
-- `config/meg_nacl.json`
-- `config/ternary.json`
-- `config/volume_ternary.json`
+- `config/water_meg.json` - calculates Water and MEG binary RK parameters at 298.15 K experimental data using density equation
+- `config/water_nacl.json` - calculates Water and NaCl binary RK parameters at 298.15 K experimental data using density equation
+- `config/meg_nacl.json` - calculates MEG and NaCl RK binary parameters at 298.15 K experimental data using density equation
+- `config/ternary.json` - calculates Water, MEG and NaCl ternary RK parameters at 298.15 K experimental data using density equation
+- `config/volume_ternary.json` - calculates Water, MEG and NaCl ternary RK parameters at 298.15 K experimental data using volume equation
 
 To test one of them do the following:
 
@@ -42,8 +42,8 @@ All output written to `stdout` will be write to `config/water_meg.out` file simu
 
 ## Authors
 
-Osvaldo Chiavone Filho (osvaldo@eq.ufrn.br) - [site](http://nupeg.ufrn.br "nupeg")
-Ruben O. Chiavone (ruben.ochiavone@gmail.com) - [GitHub](https://github.com/rubenochiavone "rubenochiavone")
+- Osvaldo Chiavone Filho (osvaldo@eq.ufrn.br) - [site](http://nupeg.ufrn.br "nupeg")
+- Ruben O. Chiavone (ruben.ochiavone@gmail.com) - [GitHub](https://github.com/rubenochiavone "rubenochiavone")
 
 Enjoy!
 
