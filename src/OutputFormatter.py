@@ -13,7 +13,7 @@ class OutputFormatter:
         print "  @@@@@@@@@@@@@@@@@@@@@@@@@@"
         print ""
         print "Performs curve fitting of ternary Redlich-Kister equation"
-        print "Authors: Osvaldo Chiavone Filho (osvaldo@nupeg.ufrn.br) and Ruben O. Chiavone"
+        print "Authors: Osvaldo Chiavone Filho (osvaldo@eq.ufrn.br) and Ruben O. Chiavone"
         print "UFRN - 2016"
         print ""
 
