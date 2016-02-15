@@ -36,11 +36,11 @@ configFile = open(configFileName, 'r', -1)
 # parse json data from config file
 configJson = json.loads(configFile.read())
 
-# print config JSON info
-OutputFormatter.printConfig(configJson)
-
 # close config file
 configFile.close()
+
+# print config JSON info
+OutputFormatter.printConfig(configJson)
 
 config = Config(configJson)
 
