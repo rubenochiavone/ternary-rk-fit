@@ -1,3 +1,5 @@
+from EquationModelFactory import EquationModelFactory
+from DensityEquationModel import DensityEquationModel
 from lmfit import Parameters
 from lmfit import Parameter
 import numpy as np
@@ -12,9 +14,31 @@ class Config:
         
         params = Parameters()
         
-        params['d1'] = Parameter('d1', value=config['compounds'][0]['density'], vary=False)
-        params['d2'] = Parameter('d2', value=config['compounds'][1]['density'], vary=False)
-        params['d3'] = Parameter('d3', value=config['compounds'][2]['density'], vary=False)
+        try:
+            equationModel = EquationModelFactory.createNew(config['equation'])
+            
+            if config['equation'] == "density":
+                params['c1'] = Parameter('c1', value=config['compounds'][0]['density'], vary=False)
+                params['c2'] = Parameter('c2', value=config['compounds'][1]['density'], vary=False)
+                params['c3'] = Parameter('c3', value=config['compounds'][2]['density'], vary=False)
+            elif config['equation'] == "volume":
+                params['c1'] = Parameter('c1', value=config['compounds'][0]['density'], vary=False)
+                params['c2'] = Parameter('c2', value=config['compounds'][1]['density'], vary=False)
+                params['c3'] = Parameter('c3', value=config['compounds'][2]['density'], vary=False)
+            elif config['equation'] == "conductivity":
+                params['c1'] = Parameter('c1', value=config['compounds'][0]['conductivity'], vary=False)
+                params['c2'] = Parameter('c2', value=config['compounds'][1]['conductivity'], vary=False)
+                params['c3'] = Parameter('c3', value=config['compounds'][2]['conductivity'], vary=False)
+            else:
+                raise ValueError("Unknown equation '{}'".format(config['equation']))
+        except KeyError:
+            print "Equation parameter must be set. Using 'density' equation ..."
+            
+            equationModel = DensityEquationModel()
+            
+            params['c1'] = Parameter('c1', value=config['compounds'][0]['density'], vary=False)
+            params['c2'] = Parameter('c2', value=config['compounds'][1]['density'], vary=False)
+            params['c3'] = Parameter('c3', value=config['compounds'][2]['density'], vary=False)
 
         rkp12Conf = config['binary']['rkp']['x1-x2']
         
@@ -109,17 +133,21 @@ class Config:
         
         data = np.delete(rawdata, 4, 1)
 
-        rho = np.delete(rawdata, [0, 1, 2, 3], 1).reshape((rawdataLength,))
+        exp = np.delete(rawdata, [0, 1, 2, 3], 1).reshape((rawdataLength,))
         
+        self.equationModel = equationModel
         self.params = params
         self.data = data
-        self.rho = rho
+        self.exp = exp
         
+    def getEquationModel(self):
+        return self.equationModel
+    
     def getParams(self):
         return self.params
     
     def getData(self):
         return self.data
     
-    def getRho(self):
-        return self.rho
+    def getExp(self):
+        return self.exp

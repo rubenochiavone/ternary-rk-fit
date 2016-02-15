@@ -27,14 +27,42 @@ class OutputFormatter:
         print "    x1 =", config['compounds'][0]['name']
         print "    x2 =", config['compounds'][1]['name']
         print "    x3 =", config['compounds'][2]['name']
+        
         print ""
-        print "    x1.density =", config['compounds'][0]['density']
-        print "    x2.density =", config['compounds'][1]['density']
-        print "    x3.density =", config['compounds'][2]['density']
+                
+        try:
+            modelName = config['equation']
+            
+            if modelName == "density":
+                print "    Using density equation"
+                print ""
+                print "    x1.density =", config['compounds'][0]['density']
+                print "    x2.density =", config['compounds'][1]['density']
+                print "    x3.density =", config['compounds'][2]['density']
+            elif modelName == "volume":
+                print "    Using volume equation"
+                print ""
+                print "    x1.volume =", config['compounds'][0]['volume']
+                print "    x2.volume =", config['compounds'][1]['volume']
+                print "    x3.volume =", config['compounds'][2]['volume']
+            elif modelName == "conductivity":
+                print "    Using conductivity equation"
+                print ""
+                print "    x1.conductivity =", config['compounds'][0]['conductivity']
+                print "    x2.conductivity =", config['compounds'][1]['conductivity']
+                print "    x3.conductivity =", config['compounds'][2]['conductivity']
+            else:
+                print "    Unknown equation '{}'".format(config['equation'])
+        except KeyError:
+            print "    Equation parameter must be set. Using density equation as default"
+            print ""
+            print "    x1.density =", config['compounds'][0]['density']
+            print "    x2.density =", config['compounds'][1]['density']
+            print "    x3.density =", config['compounds'][2]['density']
         
     
     @staticmethod
-    def printExperimentaldata(data, rho):
+    def printExperimentaldata(data, exp):
         z1 = data[:, 0] # compound #1 composition data
         z2 = data[:, 1] # compound #2 composition data
         z3 = data[:, 2] # compound #3 composition data
@@ -43,31 +71,31 @@ class OutputFormatter:
         print "[[Experimental Data]]"
         
         print "      z1", "      ", "z2", "       ", "z3", "      ", \
-                "T", "     ", " rho"
+                "T", "     ", " exp"
         
         for i in range(len(data)):
             print "    {0:1.5f}   {1:1.5f}    {2:1.5f}   {3:3.2f}   {4:1.5f}" \
-                    .format(z1[i], z2[i], z3[i], T[i], rho[i])
+                    .format(z1[i], z2[i], z3[i], T[i], exp[i])
     
     @staticmethod
-    def printResults(out, data, rho):
+    def printResults(out, data, exp, calc):
         z1 = data[:, 0] # compound #1 composition data
         z2 = data[:, 1] # compound #2 composition data
         z3 = data[:, 2] # compound #3 composition data
         T = data[:, 3]  # temperature data
         
-        rho_calc = TernaryRKModel.model(out.params, data)
-
         print "[[Results]]"
         print "      z1", "      ", "z2", "       ", "z3", "      ", \
-                "T", "     ", " rho", "   ", "rho_clc", "    ", "err"
+                "T", "     ", " exp", "    ", "calc", "     ", "err"
 
         errsum = 0
+        errpersum = 0
 
+        # max deviation
         mxdev = 0
-
+        
         for i in range(len(data)):
-            err = abs(rho[i] - rho_calc[i])
+            err = abs(exp[i] - calc[i])
             
             if err > mxdev:
                 mxdev = err
@@ -75,7 +103,7 @@ class OutputFormatter:
             errsum += err
             
             print "    {0:1.5f}   {1:1.5f}    {2:1.5f}   {3:3.2f}   {4:1.5f}   {5:.5f}   {6:.7f}" \
-                    .format(z1[i], z2[i], z3[i], T[i], rho[i], rho_calc[i], err)
+                    .format(z1[i], z2[i], z3[i], T[i], exp[i], calc[i], err)
 
         # mean deviation
         mndev = errsum / len(data)
