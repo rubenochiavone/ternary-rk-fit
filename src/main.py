@@ -45,13 +45,14 @@ configFile.close()
 config = Config(configJson)
 
 # retrieve params from config
+equationModel = config.getEquationModel()
 params = config.getParams()
 data = config.getData()
-rho = config.getRho()
+exp = config.getExp()
 
-OutputFormatter.printExperimentaldata(data, rho)
+OutputFormatter.printExperimentaldata(data, exp)
 
-minimizer = Minimizer(TernaryRKModel.residual, params, fcn_args=(data, rho))
+minimizer = Minimizer(equationModel.residual, params, fcn_args=(data, exp))
 out = minimizer.leastsq()
 
 # show output
@@ -65,5 +66,7 @@ print(lmfit.fit_report(out))
 # show output
 # lmfit.printfuncs.report_ci(ci)
 
+calc = equationModel.model(params, data, False)
+
 # print results
-OutputFormatter.printResults(out, data, rho)
+OutputFormatter.printResults(out, data, exp, calc)
