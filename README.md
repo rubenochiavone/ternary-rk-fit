@@ -43,7 +43,7 @@ All output written to `stdout` will be write to `config/water_meg.out` file simu
 ## Authors
 
 - Osvaldo Chiavone Filho (osvaldo@eq.ufrn.br) - [site](http://nupeg.ufrn.br "nupeg")
-- Ruben O. Chiavone (ruben.ochiavone@gmail.com) - [GitHub](https://github.com/rubenochiavone "rubenochiavone")
+- Ruben O. Chiavone (rubenochiavone@gmail.com) - [GitHub](https://github.com/rubenochiavone "rubenochiavone")
 
 Enjoy!
 
