@@ -32,12 +32,18 @@ There are 4 samples of how to config **ternary-rk-fit**:
 - `config/water_nacl.json`
 - `config/meg_nacl.json`
 - `config/ternary.json`
+- `config/volume_ternary.json`
 
 To test one of them do the following:
 
 `$ ./ternary-rk-fit config/water_meg.json`
 
 All output written to `stdout` will be write to `config/water_meg.out` file simultaneously.
+
+## Authors
+
+Osvaldo Chiavone Filho (osvaldo@eq.ufrn.br) - [site](http://nupeg.ufrn.br "nupeg")
+Ruben O. Chiavone (ruben.ochiavone@gmail.com) - [GitHub](https://github.com/rubenochiavone "rubenochiavone")
 
 Enjoy!
 
