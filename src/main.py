@@ -8,9 +8,16 @@ from lmfit import Minimizer
 from OutputFormatter import OutputFormatter
 from TernaryRKModel import TernaryRKModel
 
-if len(sys.argv) > 1:
-    # override default file
-    configFileName = sys.argv[1]
+argc = len(sys.argv)
+
+verbose = False
+
+if argc > 1:
+    for i in range(argc):
+        if sys.argv[i] == "-v" or sys.argv[i] == "--verbose":
+            verbose = True
+        else:
+            configFileName = sys.argv[i]
 else:
     print "Error! An input file must be specified. Call it './ternary-rk-fit <path_to_config_file>'."
     sys.exit()
@@ -52,7 +59,7 @@ exp = config.getExp()
 
 OutputFormatter.printExperimentaldata(data, exp)
 
-minimizer = Minimizer(equationModel.residual, params, fcn_args=(data, exp))
+minimizer = Minimizer(equationModel.residual, params, fcn_args=(data, exp, verbose))
 out = minimizer.leastsq()
 
 # show output
