@@ -40,6 +40,14 @@ To test one of them do the following:
 
 In the above example, all output written to `stdout` will be write to `config/water_meg.out` file simultaneously.
 
+To improve fitting algorithm output a `verbose` flag can be used:
+
+`$ ./ternary-rk-fit --verbose config/water_meg.json`
+
+or
+
+`$ ./ternary-rk-fit -v config/water_meg.json`
+
 ## Authors
 
 - Osvaldo Chiavone Filho (osvaldo@eq.ufrn.br) - [site](http://nupeg.ufrn.br "nupeg")
