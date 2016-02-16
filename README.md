@@ -8,7 +8,7 @@ Curve fitting of ternary Redlich-Kister (RK) equation.
 
 ## Requirements
 
-**ternary-rk-fit** depends on the `lmfit` python library. It performs Levenberg-Marquardt algorithm curve fitting algorithm and many more - take a look at their [site](http://cars9.uchicago.edu/software/python/lmfit/ "lmfit").
+**ternary-rk-fit** depends on `lmfit` python library. It performs Levenberg-Marquardt curve fitting algorithm and many more - take a look at their [site](http://cars9.uchicago.edu/software/python/lmfit/ "lmfit") and [source code](https://github.com/lmfit/lmfit-py/ "lmfit").
 
 In order to install it type:
 
@@ -38,7 +38,7 @@ To test one of them do the following:
 
 `$ ./ternary-rk-fit config/water_meg.json`
 
-All output written to `stdout` will be write to `config/water_meg.out` file simultaneously.
+In the above example, all output written to `stdout` will be write to `config/water_meg.out` file simultaneously.
 
 ## Authors
 
