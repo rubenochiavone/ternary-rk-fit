@@ -3,15 +3,15 @@
     "compounds": [
         {
             "name": "Water",
-            "density": 0.99708
+            "volume": 1.002928551
         },
         {
             "name": "MEG",
-            "density": 1.10978
+            "volume": 0.901079493
         },
         {
             "name": "NaCl",
-            "density": 2.165
+            "volume": 0.461893764
         }
     ],
     "binary": {
