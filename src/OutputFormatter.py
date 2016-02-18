@@ -62,7 +62,7 @@ class OutputFormatter:
         
     
     @staticmethod
-    def printExperimentaldata(data, exp):
+    def printExperimentalData(data, exp):
         z1 = data[:, 0] # compound #1 composition data
         z2 = data[:, 1] # compound #2 composition data
         z3 = data[:, 2] # compound #3 composition data

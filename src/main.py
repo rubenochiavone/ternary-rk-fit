@@ -57,7 +57,7 @@ params = config.getParams()
 data = config.getData()
 exp = config.getExp()
 
-OutputFormatter.printExperimentaldata(data, exp)
+OutputFormatter.printExperimentalData(data, exp)
 
 minimizer = Minimizer(equationModel.residual, params, fcn_args=(data, exp, verbose))
 out = minimizer.leastsq()
