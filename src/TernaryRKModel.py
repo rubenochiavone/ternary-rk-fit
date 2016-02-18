@@ -44,9 +44,9 @@ class TernaryRKModel:
         
         # ideal
         # ternary expression to avoid division by zero
-        id1 = (z1 / c1) if c1 != 0. else 0.
-        id2 = (z2 / c2) if c2 != 0. else 0.
-        id3 = (z3 / c3) if c3 != 0. else 0.
+        id1 = z1 * c1
+        id2 = z2 * c2
+        id3 = z3 * c3
         
         ideal = id1 + id2 + id3
         
