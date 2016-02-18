@@ -1,5 +1,4 @@
-from EquationModelFactory import EquationModelFactory
-from DensityEquationModel import DensityEquationModel
+from EquationModel import EquationModel
 from lmfit import Parameters
 from lmfit import Parameter
 import numpy as np
@@ -14,31 +13,33 @@ class Config:
         
         params = Parameters()
         
+        equationName = ""
+        
         try:
-            equationModel = EquationModelFactory.createNew(config['equation'])
+            equationName = config['equation']
             
-            if config['equation'] == "density":
-                params['c1'] = Parameter('c1', value=config['compounds'][0]['density'], vary=False)
-                params['c2'] = Parameter('c2', value=config['compounds'][1]['density'], vary=False)
-                params['c3'] = Parameter('c3', value=config['compounds'][2]['density'], vary=False)
-            elif config['equation'] == "volume":
-                params['c1'] = Parameter('c1', value=config['compounds'][0]['density'], vary=False)
-                params['c2'] = Parameter('c2', value=config['compounds'][1]['density'], vary=False)
-                params['c3'] = Parameter('c3', value=config['compounds'][2]['density'], vary=False)
-            elif config['equation'] == "conductivity":
+            if equationName == "density":
+                params['c1'] = Parameter('c1', value=(1.0 / config['compounds'][0]['density']), vary=False)
+                params['c2'] = Parameter('c2', value=(1.0 / config['compounds'][1]['density']), vary=False)
+                params['c3'] = Parameter('c3', value=(1.0 / config['compounds'][2]['density']), vary=False)
+            elif equationName == "volume":
+                params['c1'] = Parameter('c1', value=config['compounds'][0]['volume'], vary=False)
+                params['c2'] = Parameter('c2', value=config['compounds'][1]['volume'], vary=False)
+                params['c3'] = Parameter('c3', value=config['compounds'][2]['volume'], vary=False)
+            elif equationName == "conductivity":
                 params['c1'] = Parameter('c1', value=config['compounds'][0]['conductivity'], vary=False)
                 params['c2'] = Parameter('c2', value=config['compounds'][1]['conductivity'], vary=False)
                 params['c3'] = Parameter('c3', value=config['compounds'][2]['conductivity'], vary=False)
             else:
                 raise ValueError("Unknown equation '{}'".format(config['equation']))
         except KeyError:
+            equationName = "density"
+            
             print "Equation parameter must be set. Using 'density' equation ..."
             
-            equationModel = DensityEquationModel()
-            
-            params['c1'] = Parameter('c1', value=config['compounds'][0]['density'], vary=False)
-            params['c2'] = Parameter('c2', value=config['compounds'][1]['density'], vary=False)
-            params['c3'] = Parameter('c3', value=config['compounds'][2]['density'], vary=False)
+            params['c1'] = Parameter('c1', value=(1.0 / config['compounds'][0]['density']), vary=False)
+            params['c2'] = Parameter('c2', value=(1.0 / config['compounds'][1]['density']), vary=False)
+            params['c3'] = Parameter('c3', value=(1.0 / config['compounds'][2]['density']), vary=False)
 
         rkp12Conf = config['binary']['rkp']['x1-x2']
         
@@ -126,7 +127,6 @@ class Config:
                         max=(rkp123Conf[2]['max'] if 'max' in rkp123Conf[2] else defaultRkpMax))
         
         # data
-        
         rawdata = np.array(config['data'])
         
         rawdataLength = len(rawdata)
@@ -135,7 +135,12 @@ class Config:
 
         exp = np.delete(rawdata, [0, 1, 2, 3], 1).reshape((rawdataLength,))
         
-        self.equationModel = equationModel
+        if equationName == "density":
+            for i in range(len(exp)):
+                exp[i] = (1.0 / exp[i]) if exp[i] != 0.0 else 0.0
+        
+        # set properties
+        self.equationModel = EquationModel()
         self.params = params
         self.data = data
         self.exp = exp
