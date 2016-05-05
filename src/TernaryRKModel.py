@@ -43,7 +43,6 @@ class TernaryRKModel:
         rkp123.append(params['rkp123_3'].value) # #3 redlich-kister parameter for 1-2-3 compound composition
         
         # ideal
-        # ternary expression to avoid division by zero
         id1 = z1 * c1
         id2 = z2 * c2
         id3 = z3 * c3
